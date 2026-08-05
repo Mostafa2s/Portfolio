@@ -75,3 +75,20 @@ body::after {
     0 0 20px rgba(0,255,255,0.15),
     0 0 40px rgba(0,255,255,0.1);
 }
+:root {
+  --background: #070b16;
+  --card: #101826;
+  --primary: #00e5ff;
+  --secondary: #7c5cff;
+  --text: #ffffff;
+  --muted: #94a3b8;
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 120px;
+}
