@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# claude code — local machine settings only (skills ARE committed)
+.claude/settings.local.json
+
+# tooling / vendored dirs that are not part of the site
+/ECC/
+/graphify-out/
+/src/graphify-out/
