@@ -8,28 +8,28 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="mx-auto max-w-7xl px-6 py-32"
+      className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-24 md:py-32"
     >
       {/* Heading */}
 
-      <div className="mb-20 text-center">
+      <div className="mb-12 sm:mb-16 md:mb-20 text-center">
 
-        <p className="mb-3 uppercase tracking-[0.35em] text-cyan-400">
+        <p className="mb-3 text-xs sm:text-sm uppercase tracking-[0.35em] text-cyan-400">
           Portfolio
         </p>
 
-        <h2 className="text-5xl font-black text-white">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white">
           Featured Projects
         </h2>
 
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-400">
+        <p className="mx-auto mt-4 md:mt-6 max-w-2xl text-base sm:text-lg text-slate-400 px-4">
           A selection of personal projects showcasing my journey in Android
           development, web technologies and software engineering.
         </p>
 
       </div>
 
-      <div className="space-y-12">
+      <div className="space-y-8 md:space-y-12">
 
         {projects.map((project, index) => (
 
@@ -39,20 +39,7 @@ export default function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: index * 0.15 }}
-            className="
-              group
-              overflow-hidden
-              rounded-3xl
-              border
-              border-white/10
-              bg-white/5
-              backdrop-blur-xl
-              transition-all
-              duration-500
-              hover:-translate-y-2
-              hover:border-cyan-400/40
-              hover:shadow-[0_0_40px_rgba(34,211,238,.15)]
-            "
+            className="glass-card overflow-hidden p-0 group hover:-translate-y-2 hover:border-cyan-400/40 hover:shadow-[0_0_40px_rgba(34,211,238,.15)] transition-all duration-500"
           >
 
             {/* Preview */}
@@ -75,41 +62,41 @@ export default function Projects() {
 
             {/* Content */}
 
-            <div className="p-8">
+            <div className="p-6 md:p-8">
 
-              <div className="flex items-start justify-between gap-4">
+              <div className="flex flex-col sm:flex-row items-start justify-between gap-4">
 
                 <div>
 
-                  <h3 className="text-3xl font-bold text-white">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white">
                     {project.title}
                   </h3>
 
-                  <p className="mt-2 text-sm text-slate-500">
+                  <p className="mt-2 text-xs sm:text-sm text-slate-500">
                     Personal Project
                   </p>
 
                 </div>
 
-                <span className="rounded-full bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-300">
+                <span className="glass-badge text-xs sm:text-sm">
                   {project.status}
                 </span>
 
               </div>
 
-              <p className="mt-6 max-w-3xl leading-8 text-slate-400">
+              <p className="mt-6 max-w-3xl text-base sm:text-lg leading-7 md:leading-8 text-slate-400">
                 {project.description}
               </p>
 
               {/* Technologies */}
 
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-6 md:mt-8 flex flex-wrap gap-2 md:gap-3">
 
                 {project.technologies.map((tech) => (
 
                   <span
                     key={tech}
-                    className="rounded-full border border-cyan-400/20 bg-cyan-500/10 px-4 py-2 text-sm text-cyan-300"
+                    className="glass-badge text-xs sm:text-sm"
                   >
                     {tech}
                   </span>
@@ -120,12 +107,13 @@ export default function Projects() {
 
               {/* Buttons */}
 
-              <div className="mt-10 flex flex-wrap gap-4">
+              <div className="mt-8 md:mt-10 flex flex-wrap gap-3 md:gap-4">
 
                 <a
                   href={project.github}
                   target="_blank"
-                  className="flex items-center gap-2 rounded-xl border border-white/15 px-5 py-3 text-white transition-all duration-300 hover:border-cyan-400 hover:bg-white/5"
+                  rel="noopener noreferrer"
+                  className="glass-button"
                 >
                   <FaGithub />
                   GitHub
@@ -134,7 +122,8 @@ export default function Projects() {
                 <a
                   href={project.demo}
                   target="_blank"
-                  className="flex items-center gap-2 rounded-xl bg-cyan-500 px-5 py-3 font-semibold text-black transition-all duration-300 hover:scale-105 hover:shadow-[0_0_25px_rgba(34,211,238,.35)]"
+                  rel="noopener noreferrer"
+                  className="glass-button glass-button-primary"
                 >
                   Live Demo
                   <FaArrowUpRightFromSquare />

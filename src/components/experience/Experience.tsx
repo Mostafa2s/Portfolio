@@ -7,21 +7,21 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="mx-auto max-w-6xl px-6 py-32"
+      className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-24 md:py-32"
     >
       {/* Heading */}
 
-      <div className="mb-20 text-center">
+      <div className="mb-12 sm:mb-16 md:mb-20 text-center">
 
-        <p className="uppercase tracking-[0.35em] text-cyan-400">
+        <p className="text-xs sm:text-sm uppercase tracking-[0.35em] text-cyan-400">
           MY JOURNEY
         </p>
 
-        <h2 className="mt-3 text-5xl font-black text-white">
+        <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-black text-white">
           Experience
         </h2>
 
-        <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-400">
+        <p className="mx-auto mt-4 md:mt-6 max-w-2xl text-base sm:text-lg leading-7 md:leading-8 text-slate-400 px-4">
           My journey from tourism to software development, driven by continuous
           learning, determination and passion for technology.
         </p>
@@ -60,23 +60,23 @@ export default function Experience() {
 
             {/* Year */}
 
-            <span className="text-sm font-bold uppercase tracking-[0.25em] text-cyan-400">
+            <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-cyan-400">
               {item.year}
             </span>
 
             {/* Card */}
 
-            <div className="mt-4 rounded-3xl border border-white/10 bg-white/5 p-7 backdrop-blur-xl transition-all duration-300 group-hover:border-cyan-400/30 group-hover:bg-white/[0.07]">
+            <div className="glass-card mt-4 p-5 md:p-7 group-hover:border-cyan-400/30 group-hover:bg-white/[0.07] transition-all duration-300">
 
-              <h3 className="text-2xl font-bold text-white">
+              <h3 className="text-xl sm:text-2xl font-bold text-white">
                 {item.title}
               </h3>
 
-              <p className="mt-2 font-medium text-cyan-300">
+              <p className="mt-2 text-sm sm:text-base font-medium text-cyan-300">
                 {item.company}
               </p>
 
-              <p className="mt-5 leading-8 text-slate-400">
+              <p className="mt-4 md:mt-5 text-base sm:text-lg leading-7 md:leading-8 text-slate-400">
                 {item.description}
               </p>
 

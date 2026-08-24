@@ -56,41 +56,27 @@ return (
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
         className={`fixed left-1/2 z-50 -translate-x-1/2 transition-all duration-300 ${
-  scrolled ? "top-4" : "top-8"
+  scrolled ? "top-3 sm:top-4" : "top-6 sm:top-8"
 }`}
       >
-        <div className={`
-glass
-flex
-items-center
-gap-6
-rounded-full
-border
-border-white/10
-transition-all
-duration-300
-px-6
-py-3
-
-${scrolled ? "shadow-2xl backdrop-blur-2xl" : ""}
-`}>
+        <div className={`glass-card rounded-full flex items-center gap-4 md:gap-6 px-4 sm:px-6 py-3 ${scrolled ? "shadow-2xl backdrop-blur-2xl" : ""}`}>
 
           <Link
             href="/"
-            className="font-bold text-white tracking-wide"
+            className="-my-2 flex items-center py-2 text-sm sm:text-base font-bold text-white tracking-wide"
           >
             Mostafa
           </Link>
 
-          <div className="hidden lg:flex items-center gap-7">
+          <div className="hidden lg:flex items-center gap-5 xl:gap-7">
 
             {links.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className={`transition ${
+                className={`-my-2 py-2 text-sm xl:text-base transition ${
                   active === link.href.replace("#", "")
-                    ? "text-cyan-400"
+                    ? "text-cyan-400 font-semibold"
                     : "text-white/80 hover:text-white"
                 }`}
               >
@@ -100,30 +86,33 @@ ${scrolled ? "shadow-2xl backdrop-blur-2xl" : ""}
 
           </div>
 
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-2 xl:gap-3">
 
             <a
               href="/Mostafa_Alasaad_CV.pdf"
               target="_blank"
-              className="flex items-center gap-2 rounded-full bg-cyan-500 px-4 py-2 text-sm font-medium text-black hover:scale-105 transition"
+              rel="noopener noreferrer"
+              className="glass-button-primary flex items-center gap-2 px-4 py-2 text-sm"
             >
               <FaDownload />
-              CV
+              <span className="hidden xl:inline">CV</span>
             </a>
 
             <a
               href="https://github.com/Mostafa2s"
               target="_blank"
-              className="rounded-full border border-white/20 p-3 hover:bg-white/10 transition"
+              rel="noopener noreferrer"
+              className="glass-card p-2.5 xl:p-3 hover:bg-white/10 transition"
             >
-              <FaGithub />
+              <FaGithub className="text-base xl:text-lg" />
             </a>
 
           </div>
 
           <button
             onClick={() => setMobileOpen(true)}
-            className="lg:hidden text-white text-xl"
+            className="lg:hidden -my-2 -mr-1 flex h-11 w-11 items-center justify-center text-white text-lg sm:text-xl"
+            aria-label="Open menu"
           >
             <FaBars />
           </button>
@@ -139,21 +128,22 @@ ${scrolled ? "shadow-2xl backdrop-blur-2xl" : ""}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] bg-black/70 backdrop-blur-lg lg:hidden"
+            className="fixed inset-0 z-[60] overflow-y-auto overscroll-contain bg-black/80 backdrop-blur-xl lg:hidden"
           >
 
-            <div className="flex justify-end p-6">
+            <div className="flex justify-end p-4 sm:p-6">
 
               <button
                 onClick={() => setMobileOpen(false)}
-                className="text-3xl text-white"
+                className="glass-card p-3 text-2xl sm:text-3xl text-white"
+                aria-label="Close menu"
               >
                 <FaTimes />
               </button>
 
             </div>
 
-            <div className="mt-12 flex flex-col items-center gap-8">
+            <div className="mt-8 sm:mt-12 flex flex-col items-center gap-6 sm:gap-8 px-4 pb-12">
 
               {links.map((link) => (
 
@@ -161,7 +151,7 @@ ${scrolled ? "shadow-2xl backdrop-blur-2xl" : ""}
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="text-2xl text-white"
+                  className="flex min-h-11 items-center px-4 py-2 text-xl sm:text-2xl text-white font-medium hover:text-cyan-400 transition"
                 >
                   {link.name}
                 </a>
@@ -169,8 +159,8 @@ ${scrolled ? "shadow-2xl backdrop-blur-2xl" : ""}
               ))}
 
               <a
-                href="/cv/Mostafa_Alasaad_CV.pdf"
-                className="mt-6 rounded-full bg-cyan-500 px-7 py-4 text-black font-semibold"
+                href="/Mostafa_Alasaad_CV.pdf"
+                className="glass-button glass-button-primary mt-4 sm:mt-6 text-base sm:text-lg"
               >
                 Download CV
               </a>

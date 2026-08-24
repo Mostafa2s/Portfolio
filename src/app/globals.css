@@ -1,94 +1,239 @@
 @import "tailwindcss";
 
-html {
-  scroll-behavior: smooth;
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-shadow: rgba(0, 0, 0, 0.1);
+  --accent-primary: #667eea;
+  --accent-secondary: #764ba2;
+  --accent-cyan: #06b6d4;
+  --accent-purple: #a855f7;
+  --text-primary: rgba(255, 255, 255, 0.95);
+  --text-secondary: rgba(255, 255, 255, 0.7);
 }
 
-:root {
-  --background: #050816;
-  --foreground: #ffffff;
+/* No universal margin/padding reset here on purpose.
+   Unlayered CSS outranks Tailwind's layered utilities, so a `* { padding: 0 }`
+   rule silently kills every spacing utility on the site.
+   Tailwind preflight already resets inside the correct layer. */
+
+html {
+  scroll-behavior: smooth;
+  /* offset for the fixed navbar when jumping to #anchors */
+  scroll-padding-top: 6rem;
 }
 
 body {
-  background: #050816;
-  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  color: var(--text-primary);
+  line-height: 1.6;
   overflow-x: hidden;
-  font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  min-height: 100vh;
 }
-
-/* Animated background */
 
 body::before {
-  content: "";
+  content: '';
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background:
-    radial-gradient(circle at 20% 20%, rgba(0,255,255,0.15), transparent 25%),
-    radial-gradient(circle at 80% 30%, rgba(99,102,241,0.15), transparent 25%),
-    radial-gradient(circle at 50% 80%, rgba(168,85,247,0.12), transparent 25%);
-  z-index: -2;
+    radial-gradient(circle at 20% 30%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
+  animation: gradientShift 20s ease infinite;
+  z-index: 0;
+  pointer-events: none;
 }
 
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
+@keyframes gradientShift {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px var(--glass-shadow);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.glass-button {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 14px 28px;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.glass-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.glass-button:hover::before {
+  left: 100%;
+}
+
+.glass-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.glass-button-primary {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  border: none;
+  color: white;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+}
+
+.glass-button-primary:hover {
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.6);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: gradientFlow 3s ease infinite;
+}
+
+@keyframes gradientFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.glass-badge {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+.glow-effect {
+  position: relative;
+}
+
+.glow-effect::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-purple), var(--accent-cyan));
+  border-radius: inherit;
+  opacity: 0;
+  filter: blur(20px);
+  transition: opacity 0.3s ease;
   z-index: -1;
 }
 
-/* Glass Effect */
-
-.glass {
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 24px;
+.glow-effect:hover::before {
+  opacity: 0.7;
 }
 
-/* Gradient Text */
-
-.gradient-text {
-  background: linear-gradient(
-    90deg,
-    #00ffff,
-    #3b82f6,
-    #8b5cf6
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-/* Glow */
-.glass:hover {
-  transform: translateY(-5px);
-  transition: all .3s ease;
-  box-shadow:
-    0 0 20px rgba(0,255,255,.15),
-    0 0 40px rgba(0,255,255,.08);
-}
-.glow {
-  box-shadow:
-    0 0 20px rgba(0,255,255,0.15),
-    0 0 40px rgba(0,255,255,0.1);
-}
-:root {
-  --background: #070b16;
-  --card: #101826;
-  --primary: #00e5ff;
-  --secondary: #7c5cff;
-  --text: #ffffff;
-  --muted: #94a3b8;
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
 }
 
-body {
-  background: var(--background);
-  color: var(--text);
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-purple));
+  border-radius: 10px;
 }
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 120px;
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .glass-card {
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .glass-card {
+    border-radius: 16px;
+    padding: 1rem;
+  }
+  .glass-button {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+  .glass-badge {
+    font-size: 11px;
+    padding: 8px 16px;
+  }
 }

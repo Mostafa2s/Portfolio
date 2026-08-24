@@ -1,88 +1,96 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  FaDownload,
-  FaGithub,
-  FaArrowRight,
-} from "react-icons/fa";
+import { FaDownload, FaGithub, FaArrowRight } from "react-icons/fa";
 
 export default function HeroInfo() {
   return (
-    <div className="max-w-2xl">
+    <div className="w-full max-w-2xl mx-auto lg:mx-0">
 
-      {/* Badge */}
+      {/* Glass Badge */}
       <motion.div
-        initial={{ opacity: 0, y: 15 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="inline-flex items-center rounded-full border border-cyan-400/20 bg-cyan-400/10 px-5 py-2 text-sm uppercase tracking-[0.3em] text-cyan-300"
+        transition={{ duration: 0.6 }}
+        className="glass-badge mb-6 md:mb-8"
       >
-        Android Developer • Software Engineer
+        <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full animate-pulse" />
+        <span className="text-xs md:text-sm">Android Developer • Software Engineer</span>
       </motion.div>
 
-      {/* Heading */}
+      {/* Main Heading */}
       <motion.h1
-        initial={{ opacity: 0, y: 35 }}
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-        className="mt-8 text-6xl font-black leading-[0.9] tracking-tight text-white md:text-7xl xl:text-[7rem]"
+        transition={{ delay: 0.2, duration: 0.8 }}
+        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight"
       >
-        Building
-        <br />
-
-        <span className="bg-gradient-to-r from-cyan-400 via-sky-400 to-violet-500 bg-clip-text text-transparent">
-          Modern Apps.
+        Building{" "}
+        <span className="gradient-text">
+          Modern Apps
         </span>
-
         <br />
-        
-    
-        
+        with Passion
       </motion.h1>
 
       {/* Description */}
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
-        className="mt-12 max-w-lg text-lg leading-8 text-slate-400 md:text-xl"
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4, duration: 0.8 }}
+        className="glass-card p-5 md:p-6 mb-6 md:mb-8"
       >
-        I'm <span className="text-white font-semibold">Mostafa Alasaad</span>,
-        an Android Developer based in Germany, passionate about creating modern
-        mobile applications, responsive websites and high-quality digital
-        experiences.
-      </motion.p>
+        <p className="text-base md:text-lg text-gray-300 leading-relaxed">
+          I'm <span className="font-semibold gradient-text">Mostafa Alasaad</span>, an Android Developer based in{" "}
+          <span className="text-cyan-400 font-semibold">Germany</span>.
+          I create modern mobile applications and responsive websites with clean code and intuitive user experiences.
+        </p>
+
+        {/* Status Indicators */}
+        <div className="flex flex-wrap items-center gap-3 md:gap-4 mt-4 text-xs md:text-sm">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <span className="text-green-400 font-medium">Available</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+            <span className="text-cyan-400 font-medium">Open to Work</span>
+          </div>
+        </div>
+      </motion.div>
 
       {/* Buttons */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
-        className="mt-12 flex flex-wrap gap-4"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6, duration: 0.8 }}
+        className="flex flex-wrap gap-3 md:gap-4"
       >
         <a
           href="/Mostafa_Alasaad_CV.pdf"
-          className="flex items-center gap-3 rounded-xl bg-cyan-500 px-7 py-4 font-semibold text-black transition hover:scale-105"
+          className="glass-button glass-button-primary glow-effect flex-shrink-0"
         >
-          <FaDownload />
-          Download CV
+          <FaDownload className="text-sm md:text-base" />
+          <span className="hidden sm:inline">Download CV</span>
+          <span className="sm:hidden">CV</span>
         </a>
 
         <a
           href="#projects"
-          className="flex items-center gap-3 rounded-xl border border-white/15 px-7 py-4 text-white transition hover:border-cyan-400"
+          className="glass-button flex-shrink-0"
         >
-          View Projects
-          <FaArrowRight />
+          <span className="hidden sm:inline">View Projects</span>
+          <span className="sm:hidden">Projects</span>
+          <FaArrowRight className="text-sm md:text-base" />
         </a>
 
         <a
           href="https://github.com/Mostafa2s"
           target="_blank"
-          className="flex h-14 w-14 items-center justify-center rounded-xl border border-white/15 text-xl transition hover:border-cyan-400"
+          rel="noopener noreferrer"
+          className="glass-button flex-shrink-0"
         >
-          <FaGithub />
+          <FaGithub className="text-lg md:text-xl" />
         </a>
       </motion.div>
 
