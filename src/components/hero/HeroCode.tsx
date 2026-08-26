@@ -35,25 +35,25 @@ export default function HeroCode() {
           {"\n"}
           {"  "}<span className="text-blue-300">name</span>
           <span className="text-gray-400">:</span>{" "}
-          <span className="text-green-300">"Mostafa Alasaad"</span>
+          <span className="text-green-300">&quot;Mostafa Alasaad&quot;</span>
           <span className="text-gray-400">,</span>
           {"\n"}
           {"  "}<span className="text-blue-300">location</span>
           <span className="text-gray-400">:</span>{" "}
-          <span className="text-green-300">"Germany"</span>
+          <span className="text-green-300">&quot;Germany&quot;</span>
           <span className="text-gray-400">,</span>
           {"\n\n"}
           {"  "}<span className="text-blue-300">languages</span>
           <span className="text-gray-400">:</span>{" "}
           <span className="text-yellow-400">[</span>
           {"\n"}
-          {"    "}<span className="text-green-300">"Arabic"</span>
+          {"    "}<span className="text-green-300">&quot;Arabic&quot;</span>
           <span className="text-gray-400">,</span>
           {"\n"}
-          {"    "}<span className="text-green-300">"English"</span>
+          {"    "}<span className="text-green-300">&quot;English&quot;</span>
           <span className="text-gray-400">,</span>
           {"\n"}
-          {"    "}<span className="text-green-300">"German"</span>
+          {"    "}<span className="text-green-300">&quot;German&quot;</span>
           {"\n"}
           {"  "}<span className="text-yellow-400">]</span>
           <span className="text-gray-400">,</span>
@@ -62,13 +62,13 @@ export default function HeroCode() {
           <span className="text-gray-400">:</span>{" "}
           <span className="text-yellow-400">[</span>
           {"\n"}
-          {"    "}<span className="text-green-300">"Ausbildung"</span>
+          {"    "}<span className="text-green-300">&quot;Ausbildung&quot;</span>
           <span className="text-gray-400">,</span>
           {"\n"}
-          {"    "}<span className="text-green-300">"Internship"</span>
+          {"    "}<span className="text-green-300">&quot;Internship&quot;</span>
           <span className="text-gray-400">,</span>
           {"\n"}
-          {"    "}<span className="text-green-300">"Junior Developer"</span>
+          {"    "}<span className="text-green-300">&quot;Junior Developer&quot;</span>
           {"\n"}
           {"  "}<span className="text-yellow-400">]</span>
           <span className="text-gray-400">,</span>
@@ -77,13 +77,13 @@ export default function HeroCode() {
           <span className="text-gray-400">:</span>{" "}
           <span className="text-yellow-400">[</span>
           {"\n"}
-          {"    "}<span className="text-green-300">"Android"</span>
+          {"    "}<span className="text-green-300">&quot;Android&quot;</span>
           <span className="text-gray-400">,</span>
           {"\n"}
-          {"    "}<span className="text-green-300">"Full Stack"</span>
+          {"    "}<span className="text-green-300">&quot;Full Stack&quot;</span>
           <span className="text-gray-400">,</span>
           {"\n"}
-          {"    "}<span className="text-green-300">"Cyber Security"</span>
+          {"    "}<span className="text-green-300">&quot;Cyber Security&quot;</span>
           {"\n"}
           {"  "}<span className="text-yellow-400">]</span>
           {"\n"}

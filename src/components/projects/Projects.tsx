@@ -107,29 +107,35 @@ export default function Projects() {
 
               {/* Buttons */}
 
-              <div className="mt-8 md:mt-10 flex flex-wrap gap-3 md:gap-4">
+              {(project.github !== "#" || project.demo !== "#") && (
+                <div className="mt-8 md:mt-10 flex flex-wrap gap-3 md:gap-4">
 
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="glass-button"
-                >
-                  <FaGithub />
-                  GitHub
-                </a>
+                  {project.github !== "#" && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="glass-button"
+                    >
+                      <FaGithub />
+                      GitHub
+                    </a>
+                  )}
 
-                <a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="glass-button glass-button-primary"
-                >
-                  Live Demo
-                  <FaArrowUpRightFromSquare />
-                </a>
+                  {project.demo !== "#" && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="glass-button glass-button-primary"
+                    >
+                      Live Demo
+                      <FaArrowUpRightFromSquare />
+                    </a>
+                  )}
 
-              </div>
+                </div>
+              )}
 
             </div>
 

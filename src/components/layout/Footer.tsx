@@ -49,7 +49,7 @@ export default function Footer() {
         {/* Copyright */}
 
         <p className="mt-6 md:mt-8 text-xs sm:text-sm text-slate-500">
-          © 2026 Mostafa Alasaad · Built with Next.js, React & TypeScript
+          © {new Date().getFullYear()} Mostafa Alasaad · Built with Next.js, React & TypeScript
         </p>
 
       </div>

@@ -23,11 +23,11 @@ export default function Contact() {
         </p>
 
         <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-black text-white">
-          Let's Build Something Together
+          Let&apos;s Build Something Together
         </h2>
 
         <p className="mx-auto mt-4 md:mt-6 max-w-2xl text-base sm:text-lg leading-7 md:leading-8 text-slate-400 px-4">
-          I'm always interested in new opportunities, collaborations and
+          I&apos;m always interested in new opportunities, collaborations and
           Junior Android Developer positions.
           Feel free to get in touch.
         </p>
@@ -104,9 +104,9 @@ export default function Contact() {
           </div>
 
           <p className="mt-8 md:mt-10 text-base sm:text-lg leading-7 md:leading-8 text-slate-400">
-            I'm passionate about learning, solving real-world problems and
-            building modern software. If you think I'd be a good fit for your
-            team, I'd love to hear from you.
+            I&apos;m passionate about learning, solving real-world problems and
+            building modern software. If you think I&apos;d be a good fit for your
+            team, I&apos;d love to hear from you.
           </p>
 
         </div>
@@ -151,11 +151,12 @@ function Item({
   );
 
   if (href) {
+    const external = href.startsWith("http");
+
     return (
       <a
         href={href}
-        target="_blank"
-        rel="noopener noreferrer"
+        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
         {content}
       </a>

@@ -32,20 +32,20 @@ export default function About() {
         <div>
 
           <h3 className="text-2xl sm:text-3xl font-bold text-white">
-            Android Developer &
+            Software Engineering Student &
             <span className="block text-cyan-400">
-              Software Engineering Student
+              Android Developer
             </span>
           </h3>
 
           <p className="mt-6 md:mt-8 text-base sm:text-lg leading-7 md:leading-8 text-slate-400">
 
-            I'm Mostafa Alasaad, an Android Developer currently based in Germany.
+            I&apos;m Mostafa Alasaad, an Android Developer currently based in Germany.
 
             <br />
             <br />
 
-            My My journey started with Java and Android development, and today I'm expanding my knowledge in Software Engineering, modern web technologies, and Cyber Security.
+            My journey started with Java and Android development, and today I&apos;m expanding my knowledge in Software Engineering, modern web technologies, and Cyber Security.
 
             <br />
             <br />

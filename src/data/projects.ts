@@ -15,8 +15,6 @@ export const projects = [
     github: "#",
     demo: "#",
 
-    image: "/images/projects/tourism.png",
-
     status: "Completed",
   },
 
@@ -37,8 +35,6 @@ export const projects = [
     github: "https://github.com/Mostafa2s/Portfolio",
     demo: "https://alasaad.de",
 
-    image: "/images/projects/portfolio.png",
-
     status: "Live",
   },
 
@@ -57,8 +53,6 @@ export const projects = [
 
     github: "#",
     demo: "#",
-
-    image: "/images/projects/shooter.png",
 
     status: "Completed",
   },

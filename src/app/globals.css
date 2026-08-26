@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/* next/font exposes Fira Code as --font-fira-code on <html>;
+   route it through Tailwind's font-mono utility. */
+@theme {
+  --font-mono: var(--font-fira-code), ui-monospace, SFMono-Regular, Menlo,
+    Consolas, monospace;
+}
+
 :root {
   --glass-bg: rgba(255, 255, 255, 0.08);
   --glass-border: rgba(255, 255, 255, 0.18);
@@ -226,7 +233,6 @@ body::before {
 @media (max-width: 768px) {
   .glass-card {
     border-radius: 16px;
-    padding: 1rem;
   }
   .glass-button {
     padding: 12px 24px;

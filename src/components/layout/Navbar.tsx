@@ -24,7 +24,7 @@ useEffect(() => {
     setScrolled(window.scrollY > 40);
   };
 
-  window.addEventListener("scroll", onScroll);
+  window.addEventListener("scroll", onScroll, { passive: true });
 
   const sections = document.querySelectorAll("section[id]");
 
@@ -49,6 +49,24 @@ useEffect(() => {
   };
 }, []);
 
+useEffect(() => {
+  if (!mobileOpen) return;
+
+  const onKeyDown = (event: KeyboardEvent) => {
+    if (event.key === "Escape") {
+      setMobileOpen(false);
+    }
+  };
+
+  document.addEventListener("keydown", onKeyDown);
+  document.body.style.overflow = "hidden";
+
+  return () => {
+    document.removeEventListener("keydown", onKeyDown);
+    document.body.style.overflow = "";
+  };
+}, [mobileOpen]);
+
 return (
   <>
       <motion.nav
@@ -70,19 +88,24 @@ return (
 
           <div className="hidden lg:flex items-center gap-5 xl:gap-7">
 
-            {links.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className={`-my-2 py-2 text-sm xl:text-base transition ${
-                  active === link.href.replace("#", "")
-                    ? "text-cyan-400 font-semibold"
-                    : "text-white/80 hover:text-white"
-                }`}
-              >
-                {link.name}
-              </a>
-            ))}
+            {links.map((link) => {
+              const isActive = active === link.href.replace("#", "");
+
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  aria-current={isActive ? "true" : undefined}
+                  className={`-my-2 py-2 text-sm xl:text-base transition ${
+                    isActive
+                      ? "text-cyan-400 font-semibold"
+                      : "text-white/80 hover:text-white"
+                  }`}
+                >
+                  {link.name}
+                </a>
+              );
+            })}
 
           </div>
 
@@ -160,6 +183,8 @@ return (
 
               <a
                 href="/Mostafa_Alasaad_CV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="glass-button glass-button-primary mt-4 sm:mt-6 text-base sm:text-lg"
               >
                 Download CV

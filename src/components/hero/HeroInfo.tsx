@@ -15,7 +15,7 @@ export default function HeroInfo() {
         className="glass-badge mb-6 md:mb-8"
       >
         <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full animate-pulse" />
-        <span className="text-xs md:text-sm">Android Developer • Software Engineer</span>
+        <span className="text-xs md:text-sm">Software Engineering Student • Android Developer</span>
       </motion.div>
 
       {/* Main Heading */}
@@ -41,7 +41,7 @@ export default function HeroInfo() {
         className="glass-card p-5 md:p-6 mb-6 md:mb-8"
       >
         <p className="text-base md:text-lg text-gray-300 leading-relaxed">
-          I'm <span className="font-semibold gradient-text">Mostafa Alasaad</span>, an Android Developer based in{" "}
+          I&apos;m <span className="font-semibold gradient-text">Mostafa Alasaad</span>, an Android Developer & Software Engineering Student based in{" "}
           <span className="text-cyan-400 font-semibold">Germany</span>.
           I create modern mobile applications and responsive websites with clean code and intuitive user experiences.
         </p>
@@ -56,6 +56,11 @@ export default function HeroInfo() {
             <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
             <span className="text-cyan-400 font-medium">Open to Work</span>
           </div>
+                    <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <span className="text-green-400 font-medium">Searching for &quot;Ausbildung&quot;</span>
+          </div>
+
         </div>
       </motion.div>
 

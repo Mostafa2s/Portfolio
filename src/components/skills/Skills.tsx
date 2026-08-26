@@ -22,7 +22,7 @@ export default function Skills() {
         </h2>
 
         <p className="mx-auto mt-4 md:mt-6 max-w-2xl text-base sm:text-lg leading-7 md:leading-8 text-slate-400 px-4">
-          Technologies and tools I'm currently using while continuously
+          Technologies and tools I&apos;m currently using while continuously
           improving my software development skills.
         </p>
 
