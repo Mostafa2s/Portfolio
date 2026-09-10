@@ -25,12 +25,12 @@ export default function HeroInfo() {
         transition={{ delay: 0.2, duration: 0.8 }}
         className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight"
       >
-        Building{" "}
+        Ideas into{" "}
         <span className="gradient-text">
-          Modern Apps
+          interfaces.
         </span>
         <br />
-        with Passion
+        Code into impact.
       </motion.h1>
 
       {/* Description */}
@@ -91,6 +91,7 @@ export default function HeroInfo() {
 
         <a
           href="https://github.com/Mostafa2s"
+          aria-label="View Mostafa's GitHub profile"
           target="_blank"
           rel="noopener noreferrer"
           className="glass-button flex-shrink-0"

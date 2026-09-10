@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion, useScroll } from "framer-motion";
 import { FaBars, FaTimes, FaGithub, FaDownload } from "react-icons/fa";
 
 const links = [
-  { name: "About", href: "#about" },
   { name: "Projects", href: "#projects" },
+  { name: "About", href: "#about" },
   { name: "Experience", href: "#experience" },
   { name: "Skills", href: "#skills" },
   { name: "Certificates", href: "#certificates" },
@@ -16,68 +16,79 @@ const links = [
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const menu = useRef<HTMLDialogElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const reduced = useReducedMotion();
+  const { scrollYProgress } = useScroll();
  const [active, setActive] = useState("");
 const [scrolled, setScrolled] = useState(false);
 
 useEffect(() => {
-  const onScroll = () => {
+  const sections = Array.from(document.querySelectorAll<HTMLElement>("main section[id]"));
+  let frame = 0;
+  const update = () => {
+    frame = 0;
     setScrolled(window.scrollY > 40);
+    const marker = Math.min(window.innerHeight * .3, 220);
+    let current = "";
+    for (const section of sections) {
+      if (section.getBoundingClientRect().top <= marker) current = section.id;
+    }
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) current = sections.at(-1)?.id ?? current;
+    setActive(current);
+  };
+  const onScroll = () => {
+    if (!frame) frame = requestAnimationFrame(update);
   };
 
   window.addEventListener("scroll", onScroll, { passive: true });
 
-  const sections = document.querySelectorAll("section[id]");
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActive(entry.target.id);
-        }
-      });
-    },
-    {
-      threshold: 0.4,
-    }
-  );
-
-  sections.forEach((section) => observer.observe(section));
+  window.addEventListener("resize", onScroll);
+  const observer = new ResizeObserver(onScroll);
+  observer.observe(document.body);
+  onScroll();
 
   return () => {
     observer.disconnect();
+    cancelAnimationFrame(frame);
+    window.removeEventListener("resize", onScroll);
     window.removeEventListener("scroll", onScroll);
   };
 }, []);
 
 useEffect(() => {
   if (!mobileOpen) return;
-
-  const onKeyDown = (event: KeyboardEvent) => {
-    if (event.key === "Escape") {
-      setMobileOpen(false);
-    }
-  };
-
-  document.addEventListener("keydown", onKeyDown);
+  const dialog = menu.current;
+  const opener = trigger.current;
+  const previousOverflow = document.body.style.overflow;
+  dialog?.showModal();
   document.body.style.overflow = "hidden";
+  const desktop = window.matchMedia("(min-width: 1024px)");
+  const onResize = () => { if (desktop.matches) setMobileOpen(false); };
+  desktop.addEventListener("change", onResize);
+  onResize();
 
   return () => {
-    document.removeEventListener("keydown", onKeyDown);
-    document.body.style.overflow = "";
+    desktop.removeEventListener("change", onResize);
+    dialog?.close();
+    document.body.style.overflow = previousOverflow;
+    if (!desktop.matches) opener?.focus({ preventScroll: true });
   };
 }, [mobileOpen]);
 
 return (
   <>
+      <motion.div aria-hidden="true" className="reading-progress" style={{ scaleX: scrollYProgress }} />
       <motion.nav
-        initial={{ y: -80 }}
+        aria-label="Main navigation"
+        initial={false}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: reduced ? 0 : 0.6 }}
         className={`fixed left-1/2 z-50 -translate-x-1/2 transition-all duration-300 ${
   scrolled ? "top-3 sm:top-4" : "top-6 sm:top-8"
 }`}
       >
-        <div className={`glass-card rounded-full flex items-center gap-4 md:gap-6 px-4 sm:px-6 py-3 ${scrolled ? "shadow-2xl backdrop-blur-2xl" : ""}`}>
+        <div className={`studio-nav-shell glass-card rounded-full flex items-center gap-4 md:gap-6 px-4 sm:px-6 py-3 ${scrolled ? "shadow-2xl backdrop-blur-2xl" : ""}`}>
 
           <Link
             href="/"
@@ -96,13 +107,14 @@ return (
                   key={link.name}
                   href={link.href}
                   aria-current={isActive ? "true" : undefined}
-                  className={`-my-2 py-2 text-sm xl:text-base transition ${
+                  className={`studio-nav-link -my-2 py-2 text-sm xl:text-base transition ${
                     isActive
                       ? "text-cyan-400 font-semibold"
                       : "text-white/80 hover:text-white"
                   }`}
                 >
-                  {link.name}
+                  {isActive && <motion.span className="nav-active-marker" layoutId="active-navigation" transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 350, damping: 32 }} />}
+                  <span className="relative">{link.name}</span>
                 </a>
               );
             })}
@@ -123,6 +135,7 @@ return (
 
             <a
               href="https://github.com/Mostafa2s"
+              aria-label="Mostafa on GitHub"
               target="_blank"
               rel="noopener noreferrer"
               className="glass-card p-2.5 xl:p-3 hover:bg-white/10 transition"
@@ -133,6 +146,11 @@ return (
           </div>
 
           <button
+            ref={trigger}
+            type="button"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-navigation"
+            aria-haspopup="dialog"
             onClick={() => setMobileOpen(true)}
             className="lg:hidden -my-2 -mr-1 flex h-11 w-11 items-center justify-center text-white text-lg sm:text-xl"
             aria-label="Open menu"
@@ -143,20 +161,25 @@ return (
         </div>
       </motion.nav>
 
-      <AnimatePresence>
-
+      <dialog ref={menu} id="mobile-navigation" className="studio-mobile-dialog" aria-labelledby="mobile-menu-title"
+        onKeyDown={(event) => {
+          if (event.key !== "Tab") return;
+          const targets = event.currentTarget.querySelectorAll<HTMLElement>('button:not([disabled]), a[href]');
+          const first = targets[0];
+          const last = targets[targets.length - 1];
+          if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+          else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+        }}
+        onCancel={(event) => { event.preventDefault(); setMobileOpen(false); }} onClose={() => setMobileOpen(false)} onClick={(event) => { if (event.target === event.currentTarget) setMobileOpen(false); }}>
         {mobileOpen && (
+          <motion.div className="studio-mobile-panel" initial={reduced ? false : { opacity: 0, rotateX: -12, y: -24, scale: .97 }} animate={{ opacity: 1, rotateX: 0, y: 0, scale: 1 }} transition={{ duration: reduced ? 0 : .4, ease: [.22, 1, .36, 1] }}>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] overflow-y-auto overscroll-contain bg-black/80 backdrop-blur-xl lg:hidden"
-          >
-
-            <div className="flex justify-end p-4 sm:p-6">
+            <div className="flex items-center justify-between p-4 sm:p-6">
+              <h2 id="mobile-menu-title" className="mobile-menu-title">EXPLORE / MOSTAFA</h2>
 
               <button
+                type="button"
+                autoFocus
                 onClick={() => setMobileOpen(false)}
                 className="glass-card p-3 text-2xl sm:text-3xl text-white"
                 aria-label="Close menu"
@@ -166,17 +189,18 @@ return (
 
             </div>
 
-            <div className="mt-8 sm:mt-12 flex flex-col items-center gap-6 sm:gap-8 px-4 pb-12">
+            <nav aria-label="Mobile navigation" className="mobile-menu-links">
 
-              {links.map((link) => (
+              {links.map((link, index) => (
 
                 <a
                   key={link.name}
                   href={link.href}
+                  aria-current={active === link.href.slice(1) ? "location" : undefined}
                   onClick={() => setMobileOpen(false)}
-                  className="flex min-h-11 items-center px-4 py-2 text-xl sm:text-2xl text-white font-medium hover:text-cyan-400 transition"
+                  className="mobile-menu-link"
                 >
-                  {link.name}
+                  <span className="mobile-link-number">0{index + 1}</span><span>{link.name}</span><span className="mobile-link-arrow" aria-hidden="true">↗</span>
                 </a>
 
               ))}
@@ -190,13 +214,13 @@ return (
                 Download CV
               </a>
 
-            </div>
+            </nav>
 
           </motion.div>
 
         )}
 
-      </AnimatePresence>
+      </dialog>
     </>
   );
 }

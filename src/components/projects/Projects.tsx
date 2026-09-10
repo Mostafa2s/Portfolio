@@ -1,10 +1,12 @@
 "use client";
 
 import { projects } from "@/data/projects";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import ProjectDepth from "./ProjectDepth";
 import { FaGithub, FaArrowUpRightFromSquare } from "react-icons/fa6";
 
 export default function Projects() {
+  const reduced = useReducedMotion();
   return (
     <section
       id="projects"
@@ -35,26 +37,29 @@ export default function Projects() {
 
           <motion.div
             key={project.id}
-            initial={{ opacity: 0, y: 70 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: index * 0.15 }}
-            className="glass-card overflow-hidden p-0 group hover:-translate-y-2 hover:border-cyan-400/40 hover:shadow-[0_0_40px_rgba(34,211,238,.15)] transition-all duration-500"
+            initial={false}
+            whileInView={reduced ? {} : { y: [38, 0], rotateX: [6, 0], opacity: [.65, 1] }}
+            viewport={{ once: true, amount: .15 }}
+            transition={{ duration: .7, ease: [.22, 1, .36, 1] }}
+            className="project-reveal group"
           >
+            <ProjectDepth>
 
             {/* Preview */}
 
-            <div className="aspect-video bg-gradient-to-br from-[#111827] via-[#0f172a] to-[#1e293b] flex flex-col items-center justify-center border-b border-white/10">
+            <div className="project-dimensional-preview aspect-video flex flex-col items-center justify-center border-b border-white/10">
+              <span className="project-index" aria-hidden="true">0{index + 1}</span>
+              <div className="project-preview-orbit" aria-hidden="true" />
 
-              <span className="text-6xl transition duration-300 group-hover:scale-110">
+              <span className="project-floating-icon text-6xl" aria-hidden="true">
                 💻
               </span>
 
-              <h3 className="mt-6 text-2xl font-bold text-white">
+              <p className="project-floating-title mt-6 text-2xl font-bold text-white">
                 {project.title}
-              </h3>
+              </p>
 
-              <p className="mt-2 text-center text-slate-400">
+              <p className="mt-2 text-center text-slate-400 px-5">
                 {project.technologies.join(" • ")}
               </p>
 
@@ -139,6 +144,7 @@ export default function Projects() {
 
             </div>
 
+            </ProjectDepth>
           </motion.div>
 
         ))}
